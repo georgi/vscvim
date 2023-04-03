@@ -1,6 +1,6 @@
-# Neovim Configuration
+# VS Code Neovim Configuration
 
-This Neovim configuration uses the Lazy.nvim plugin manager to load and manage the following plugins:
+This Neovim configuration is optimized for VS Code and uses the Lazy.nvim plugin manager to load and manage the following plugins:
 
 - **flit.nvim**: A plugin for quick cursor movement across text.
 - **leap.nvim**: A plugin for quickly jumping to characters.
