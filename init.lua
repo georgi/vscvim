@@ -4,15 +4,63 @@ if not vim.loop.fs_stat(lazypath) then
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
+		"https:--github.com/folke/lazy.nvim.git",
 		"--branch=stable", -- latest stable release
 		lazypath,
 	})
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.opt.nu = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
+vim.opt.wrap = false
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
 -- Example using a list of specs with the default options
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- In visual mode, remaps 'J' to move the selected block of text one line down and reselect it
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- In visual mode, remaps 'K' to move the selected block of text one line up and reselect it
+vim.keymap.set("n", "J", "mzJ`z") -- In normal mode, remaps 'J' to join the current line with the line below and keep the cursor at the current position
+vim.keymap.set("n", "<C-d>", "<C-d>zz") -- In normal mode, remaps 'Ctrl-d' to scroll down half a screen and center the cursor line in the window
+vim.keymap.set("n", "<C-u>", "<C-u>zz") -- In normal mode, remaps 'Ctrl-u' to scroll up half a screen and center the cursor line in the window
+vim.keymap.set("n", "n", "nzzzv") -- In normal mode, remaps 'n' to find the next search result, center the cursor line in the window, and highlight the match
+vim.keymap.set("n", "N", "Nzzzv") -- In normal mode, remaps 'N' to find the previous search result, center the cursor line in the window, and highlight the match
+-- greatest remap ever
+vim.keymap.set("x", "<leader>p", [["_dP]]) -- In visual mode, remaps '<leader>p' to delete the selected text and paste it before the cursor
+
+-- next greatest remap ever : asbjornHaland
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]]) -- In normal and visual modes, remaps '<leader>y' to yank the selected text into the system clipboard
+vim.keymap.set("n", "<leader>Y", [["+Y]]) -- In normal mode, remaps '<leader>Y' to yank the current line into the system clipboard
+
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]]) -- In normal and visual modes, remaps '<leader>d' to delete the selected text without affecting the yank register
+
+-- This is going to get me cancelled
+vim.keymap.set("i", "<C-c>", "<Esc>") -- In insert mode, remaps 'Ctrl-c' to exit insert mode
+
+vim.keymap.set("n", "Q", "<nop>") -- In normal mode, disables the 'Q' key by mapping it to 'nop' (no operation)
+
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz") -- In normal mode, remaps 'Ctrl-k' to go to the next quickfix item and center the cursor line in the window
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz") -- In normal mode, remaps 'Ctrl-j' to go to the previous quickfix item and center the cursor line in the window
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz") -- In normal mode, remaps '<leader>k' to go to the next location list item and center the cursor line in the window
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz") -- In normal mode, remaps '<leader>j' to go to the previous location list item and center the cursor line in the window
+
+vim.keymap.set("n", "<leader>s", [[:%s/<<C-r><C-w>>/<C-r><C-w>/gI<Left><Left><Left>]]) -- In normal mode, remaps '<leader>s' to search and replace the word under the cursor
+vim.keymap.set("n", "<leader>x", ":silent !chmod +x %<CR>") -- In normal mode, remaps '<leader>x' to make the current file executable
 
 require("lazy").setup({
 	{
